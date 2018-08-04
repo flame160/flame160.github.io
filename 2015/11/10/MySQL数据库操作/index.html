@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL数据库操作 | dubo blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中，遇到很多对数据库的相关操作，经过学习之后，在这里进行整理，列出对数据库的基本操作，本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据库操作">
+<meta property="og:url" content="http://flame160.git.io/2015/11/10/MySQL数据库操作/index.html">
+<meta property="og:site_name" content="dubo blog">
+<meta property="og:description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中，遇到很多对数据库的相关操作，经过学习之后，在这里进行整理，列出对数据库的基本操作，本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:29:20.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL数据库操作">
+<meta name="twitter:description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中，遇到很多对数据库的相关操作，经过学习之后，在这里进行整理，列出对数据库的基本操作，本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
+  
+    <link rel="alternative" href="/atom.xml" title="dubo blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xpe3k.com1.z0.glb.clouddn.com/21.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3d4e7ff992690de31097d44863cd0401";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xpe3k.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720180328152927.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">dubo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">爱生活、爱骑行、爱旅行</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/flame160" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/3538274295/" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cug_flame/activities" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://www.douban.com/people/134178038/" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/LeetCode/" style="font-size: 15px;">LeetCode</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/sentiment-analysis/" style="font-size: 10px;">sentiment analysis</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据挖掘/" style="font-size: 10px;">数据挖掘</a> <a href="/tags/特征提取/" style="font-size: 10px;">特征提取</a> <a href="/tags/网页前端/" style="font-size: 10px;">网页前端</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://coolshell.cn/">酷壳</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mindhacks.cn/">刘未鹏的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.nosqlfan.com/">NoSQLFan</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.udpwork.com/">IT牛人博客聚合</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://stackoverflow.com/">Stack Overflow</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://weekly.manong.io/issues/">码农周刊</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://leetcode.com">LeetCode</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.nowcoder.com/">牛客网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/www.imooc.com">慕课网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://scholar.glgoo.org/">Glgoo学术</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://memect.com/">好东西传送门</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://36kr.com/">36Kr</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.mafengwo.cn/">蚂蜂窝</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.17jita.com/">17吉他</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.szbike.com/">骑行天下</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">就读于中国地质大学(武汉),计算机科学与技术。研究方向为机器学习,数据挖掘。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">dubo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xpe3k.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720180328152927.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">dubo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">爱生活、爱骑行、爱旅行</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/flame160" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/3538274295/" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cug_flame/activities" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://www.douban.com/people/134178038/" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-MySQL数据库操作" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/10/MySQL数据库操作/" class="article-date">
+  	<time datetime="2015-11-10T11:35:42.000Z" itemprop="datePublished">2015-11-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL数据库操作
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/学习/">学习</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中，遇到很多对数据库的相关操作，经过学习之后，在这里进行整理，列出对数据库的基本操作，本博客只是对应用较为常见的操作进行整理。<br>MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。<br><a id="more"></a></p>
+<h2 id="mysql服务操作"><a href="#mysql服务操作" class="headerlink" title="mysql服务操作"></a>mysql服务操作</h2><ul>
+<li><strong>启动或关闭mysql服务</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net start mysql//启动服务</span><br><span class="line">net stop mysql //关闭服务</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>增加新用户</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant 权限 on 数据库.* to 用户名@登陆主机 identified by <span class="string">"密码"</span><span class="comment">//基本格式</span></span><br><span class="line">grant select,insert,update,<span class="keyword">delete</span> on *.* to user1@localhost identified by <span class="string">"password1"</span>;<span class="comment">//具体例子</span></span><br><span class="line"><span class="comment">//用户名为user1，密码为password1，让其在本机上登陆，并对所有的数据库有查询、插入、修改、删除的权限。</span></span><br><span class="line"><span class="comment">//首先以root用户连接mysql，然后键入该命令</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>进入数据库</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql -u用户名 -p<span class="comment">//Enter键后在输入密码</span></span><br><span class="line">mysql -u用户名 -p密码<span class="comment">//mysql -uroot -proot(用户名:root,密码:root)</span></span><br><span class="line">mysql -h主机地址 -u用户名 -p密码<span class="comment">//指定连接主机</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>退出mysql操作</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quit/<span class="built_in">exit</span> <span class="comment">//更改密码</span></span><br></pre></td></tr></table></figure>
+<h2 id="mysql常用命令"><a href="#mysql常用命令" class="headerlink" title="mysql常用命令"></a>mysql常用命令</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">SELECT VERSION();</td>
+<td style="text-align:left">显示当前服务器版本</td>
+</tr>
+<tr>
+<td style="text-align:left">SELECT NOW();</td>
+<td style="text-align:left">显示当前日期时间</td>
+</tr>
+<tr>
+<td style="text-align:left">SELECT USER();</td>
+<td style="text-align:left">显示当前用户</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">show databases;</td>
+<td style="text-align:left">列出数据库</td>
+</tr>
+<tr>
+<td style="text-align:left">use database_name;</td>
+<td style="text-align:left">使用database_name数据库</td>
+</tr>
+<tr>
+<td style="text-align:left">create database think character set utf8 ;</td>
+<td style="text-align:left">创建数据库think(数据库名)，设置编码为utf8</td>
+</tr>
+<tr>
+<td style="text-align:left">drop database think;</td>
+<td style="text-align:left">删除数据库think(数据库名)</td>
+</tr>
+<tr>
+<td style="text-align:left">grant all on wish.* to “hdw” @”localhost” identified by “hdw”;</td>
+<td style="text-align:left">只允许hdw用户操作数据库wish，密码是hdw</td>
+</tr>
+<tr>
+<td style="text-align:left">C://mysqldump -uroot -p houdunwang &gt; d:/houdunwang.sql</td>
+<td style="text-align:left">将数据库houdunwang中的数据导出d:/houdunwang.sql(未通过mysql进入)</td>
+</tr>
+<tr>
+<td style="text-align:left">C://mysql -uroot -p houdunwang &lt; d:/houdunwang.sql</td>
+<td style="text-align:left">将数据d:/houdunwang.sql导入数据库houdunwang(未通过mysql进入)</td>
+</tr>
+<tr>
+<td style="text-align:left">mysql&gt;source d:/houdunwang.sql;</td>
+<td style="text-align:left">将数据d:/houdunwang.sql导入数据库houdunwang(已通过mysql进入)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="对数据库中表的操作"><a href="#对数据库中表的操作" class="headerlink" title="对数据库中表的操作"></a>对数据库中表的操作</h2><ul>
+<li><strong>查看表属性</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show tables  <span class="comment">//查看表名</span></span><br><span class="line">desc hd_wish <span class="comment">//查看表hd_wish结构</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>创建表</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table hd_wish(id int unsigned not null primary key auto_increment, username varchar(20) not null default '',content</span><br><span class="line">varchar(255) not null default '',time int(10) not null default 0) engine myisam charset utf8;</span><br><span class="line"><span class="comment">//创建表hd_wish（primary key 定义这个字段为主键，auto_increment 定义这个字段为自动增长，引擎为myisam，字符集为utf8）</span></span><br><span class="line">create table new_tab_name like old_tab_name; <span class="comment">//用一个已存在的表来建新表，但不包含旧表的数据</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>查看表中的数据</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select *from hd_wish;  <span class="comment">//查看表hd_wish中的所有数据</span></span><br><span class="line">select *from hd_wish where id=<span class="number">1</span>; <span class="comment">//查看表hd_wish中的id=1的数据</span></span><br><span class="line"><span class="function">select <span class="title">count</span><span class="params">(*)</span> from hd_wish</span>;  <span class="comment">//统计表hd_wish中有多少条记录</span></span><br><span class="line">select *from stu where sname like <span class="string">"李%"</span>;  <span class="comment">//模糊匹配</span></span><br><span class="line">select if(sex "男生","女生") as stusex,sname from stu;  //as取别名（stusex）</span><br><span class="line"><span class="function">select <span class="title">concat</span><span class="params">(<span class="string">"姓名:"</span>,sname,<span class="string">"性别:"</span>,sex,<span class="string">"QQ"</span>,qq)</span> as stuinfo from stu</span>;  <span class="comment">//字符串与字段进行连接</span></span><br><span class="line">select *from stu order by id desc limit <span class="number">0</span>,<span class="number">1</span>; <span class="comment">//从第零个开始取1个</span></span><br><span class="line">select *from stu order by id desc limit <span class="number">4</span>; <span class="comment">//取4条数据</span></span><br><span class="line">select distinct year(birday) as "出生年份" from stu;  //distinct去掉重复的部分,year(birday)只得到年份</span><br><span class="line">select user.value from user where user.<span class="function">uid <span class="title">in</span> <span class="params">(select mete.uid from mete where mete.cid=<span class="number">1</span>)</span></span>;</span><br><span class="line"><span class="comment">//从表user中查找数据user.value,其满足user.uid满足的条件为：mete表中mete。cid为1的mete.uid。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>插入</strong></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into hd_user set username='admin',password=md5('admin'),logintime=unix_timestamp(now()); //向表hd_user中插入数据（非标准版）</span><br><span class="line">insert into hd_user(username,password,logintime) values('admin',md5('admin'),unix_timestamp(now())); //向表hd_user中插入数据（标准版）</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>删除</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">drop table hd_wish;   <span class="comment">//删除表hd_wish</span></span><br><span class="line"><span class="keyword">delete</span> from hd_wish;   <span class="comment">//将表hd_wish中的记录清空</span></span><br><span class="line">delect from hd_wish where username=<span class="string">"admin"</span>;  <span class="comment">//可用 WHERE 子句来选择所要删除的记录</span></span><br><span class="line"><span class="keyword">delete</span> table table_name column colmn_name;  <span class="comment">//删除表中的一个字段</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>修改</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">alter table tab_name add PRIMARY <span class="title">KEY</span> <span class="params">(col_name)</span></span>;  <span class="comment">//更改表得的定义把col_num设为主键</span></span><br><span class="line"><span class="function">alter table tab_name drop PRIMARY <span class="title">KEY</span> <span class="params">(col_name)</span></span>;  <span class="comment">//把主键的定义删除</span></span><br><span class="line">update stu <span class="built_in">set</span> birday=<span class="string">"1990/2/23"</span> where id=<span class="number">1</span>;   <span class="comment">//修改表stu中id=1的数据(将birday修改为"1990/2/23")</span></span><br><span class="line">alter table tab_name rename to new_tab_name;   <span class="comment">//修改表名</span></span><br><span class="line"><span class="function">alter table tab_name change old_col new_col <span class="title">varchar</span><span class="params">(<span class="number">20</span>)</span></span>; <span class="comment">//修改字段名--必须为当前字段指定数据类型等属性，否则不能修改</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>增加</strong></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table stu add birday date;  <span class="comment">//增加表stu字段birday</span></span><br><span class="line">alter table stu add name varchar(20) not null default '';  //增加表stu字段name</span><br></pre></td></tr></table></figure>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><ul>
+<li><strong>取消</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\c   <span class="comment">//取消所有命令   </span></span><br><span class="line">Esc  <span class="comment">//取消本行命令</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>外键</strong></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">CREATE TABLE <span class="title">provinces</span> <span class="params">(</span></span></span><br><span class="line">  id SMALLINT(5) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,</span><br><span class="line">  <span class="function">pname <span class="title">VARCHAR</span><span class="params">(<span class="number">20</span>)</span> NOT <span class="literal">NULL</span></span></span><br><span class="line">)ENGINE MYISAM DEFAULT CHARSET utf8;</span><br><span class="line"></span><br><span class="line"><span class="function">CREATE TABLE <span class="title">users</span> <span class="params">(</span></span></span><br><span class="line">  id SMALLINT(5) UNDSIGNED PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">  username VARCHAR(20) NOT NULL,</span><br><span class="line">  pid SMALLINT(5) UNSIGNED,</span><br><span class="line">  <span class="function">FOREIGN <span class="title">KEY</span> <span class="params">(pid)</span> REFERENCES <span class="title">provinces</span> <span class="params">(id)</span></span></span><br><span class="line">)ENGINE MYISAM DEFAULT CHARSET utf8;;</span><br></pre></td></tr></table></figure>
+<p>参考：<br><a href="http://blog.sina.com.cn/s/blog_74d4eb690100r80t.html" target="_blank" rel="noopener">MySQL数据库基本操作命令</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/15/数据挖掘-特征提取/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          数据挖掘-特征提取
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/30/STL标准模板库/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">STL标准模板库</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015——2018 dubo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

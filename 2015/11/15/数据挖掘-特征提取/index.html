@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据挖掘-特征提取 | dubo blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数据挖掘如今在各个领域起到的作用越来越大，学习数据挖掘首先要了解数据挖掘十大算法，网易公开课中提供了一个machine learning学习入门较好的课程Andrew Ng 的 Machine Learning 课程。入门后可以学习几本不错的书，如Bishop 的 Pattern Recognition and Machine Learning，elements of statistical le">
+<meta name="keywords" content="数据挖掘,特征提取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据挖掘-特征提取">
+<meta property="og:url" content="http://flame160.git.io/2015/11/15/数据挖掘-特征提取/index.html">
+<meta property="og:site_name" content="dubo blog">
+<meta property="og:description" content="数据挖掘如今在各个领域起到的作用越来越大，学习数据挖掘首先要了解数据挖掘十大算法，网易公开课中提供了一个machine learning学习入门较好的课程Andrew Ng 的 Machine Learning 课程。入门后可以学习几本不错的书，如Bishop 的 Pattern Recognition and Machine Learning，elements of statistical le">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3356269930,1126074676&fm=58">
+<meta property="og:image" content="http://images.cnitblog.com/blog/337520/201403/191359041154767.png">
+<meta property="og:updated_time" content="2018-03-29T10:32:30.513Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据挖掘-特征提取">
+<meta name="twitter:description" content="数据挖掘如今在各个领域起到的作用越来越大，学习数据挖掘首先要了解数据挖掘十大算法，网易公开课中提供了一个machine learning学习入门较好的课程Andrew Ng 的 Machine Learning 课程。入门后可以学习几本不错的书，如Bishop 的 Pattern Recognition and Machine Learning，elements of statistical le">
+<meta name="twitter:image" content="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3356269930,1126074676&fm=58">
+  
+    <link rel="alternative" href="/atom.xml" title="dubo blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xpe3k.com1.z0.glb.clouddn.com/21.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3d4e7ff992690de31097d44863cd0401";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xpe3k.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720180328152927.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">dubo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">爱生活、爱骑行、爱旅行</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/flame160" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/3538274295/" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cug_flame/activities" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://www.douban.com/people/134178038/" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/LeetCode/" style="font-size: 15px;">LeetCode</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/sentiment-analysis/" style="font-size: 10px;">sentiment analysis</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据挖掘/" style="font-size: 10px;">数据挖掘</a> <a href="/tags/特征提取/" style="font-size: 10px;">特征提取</a> <a href="/tags/网页前端/" style="font-size: 10px;">网页前端</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://coolshell.cn/">酷壳</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mindhacks.cn/">刘未鹏的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.nosqlfan.com/">NoSQLFan</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.udpwork.com/">IT牛人博客聚合</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://stackoverflow.com/">Stack Overflow</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://weekly.manong.io/issues/">码农周刊</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://leetcode.com">LeetCode</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.nowcoder.com/">牛客网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/www.imooc.com">慕课网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://scholar.glgoo.org/">Glgoo学术</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://memect.com/">好东西传送门</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://36kr.com/">36Kr</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.mafengwo.cn/">蚂蜂窝</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.17jita.com/">17吉他</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.szbike.com/">骑行天下</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">就读于中国地质大学(武汉),计算机科学与技术。研究方向为机器学习,数据挖掘。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">dubo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xpe3k.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720180328152927.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">dubo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">爱生活、爱骑行、爱旅行</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/flame160" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/3538274295/" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/cug_flame/activities" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://www.douban.com/people/134178038/" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-数据挖掘-特征提取" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/15/数据挖掘-特征提取/" class="article-date">
+  	<time datetime="2015-11-15T11:14:11.000Z" itemprop="datePublished">2015-11-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据挖掘-特征提取
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据挖掘/">数据挖掘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/特征提取/">特征提取</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/科研/">科研</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数据挖掘如今在各个领域起到的作用越来越大，学习数据挖掘首先要了解数据挖掘十大算法，网易公开课中提供了一个machine learning学习入门较好的课程<a href="http://v.163.com/special/opencourse/machinelearning.html" target="_blank" rel="noopener">Andrew Ng 的 Machine Learning 课程</a>。入门后可以学习几本不错的书，如Bishop 的 Pattern Recognition and Machine Learning，elements of statistical learning和Machine Learning A Probabilistic Perspective也是非常好的参考书。此外也可以看看一些相关会议的论文,包括 SIGMOD, KDD, ICDM, ICML, NIPS, IJCAI, AAAI 等等。本博客介绍数据挖掘中用于特征提取方法：1.主成分分析（PCA）;2.独立成分分析（ICA）;3.Gabor变换;4.匹配追踪。<br><a id="more"></a></p>
+<h2 id="1-主成分分析PCA"><a href="#1-主成分分析PCA" class="headerlink" title="1.主成分分析PCA"></a>1.主成分分析PCA</h2><h4 id="（1）PCA简介"><a href="#（1）PCA简介" class="headerlink" title="（1）PCA简介"></a>（1）PCA简介</h4><ul>
+<li><p><strong>主成分分析PCA(Principle Component Analysis)</strong>:将多个变量通过线性变换以选出较少个数重要变量的一种多元统计分析方法，又称主分量分析。</p>
+</li>
+<li><p><strong>主成分分析PCA原理</strong>:在用统计分析方法研究多变量的课题时，变量个数太多就会增加课题的复杂性。人们自然希望变量个数较少而得到的信息较多。在很多情形，变量之间是有一定的相关关系的，当两个变量之间有一定相关关系时，可以解释为这两个变量反映此课题的信息有一定的重叠。主成分分析是对于原先提出的所有变量，将重复的变量（关系紧密的变量）删去多余，建立尽可能少的新变量，使得这些新变量是两两不相关的，而且这些新变量在反映课题的信息方面尽可能保持原有的信息。<br>设法将原来变量重新组合成一组新的互相无关的几个综合变量，同时根据实际需要从中可以取出几个较少的综合变量尽可能多地反映原来变量的信息的统计方法叫做主成分分析或称主分量分析，也是数学上用来降维的一种方法。</p>
+</li>
+<li><p><strong>主成分分析PCA思想</strong>:将n维特征映射到k维上(k&lt;n)这k维是全新的正交特征。这k维特征称为主元，是重新构造出来的k维特征，而不是简单地从n维特征中去除其余n-k维特征</p>
+</li>
+</ul>
+<h4 id="（2）PCA分析"><a href="#（2）PCA分析" class="headerlink" title="（2）PCA分析"></a>（2）PCA分析</h4><ul>
+<li><strong>PCA的优点</strong></li>
+</ul>
+<ol>
+<li>可消除评价指标之间的相关影响:因为主成分分析在对原指标变量进行变换后形成了彼此相互独立的主成分，而且实践证明指标之间相关程度越高，主成分分析效果越好。</li>
+<li>可减少指标选择的工作量:对于其它评价方法，由于难以消除评价指标间的相关影响，所以选择指标时要花费不少精力，而主成分分析由于可以消除这种相关影响，所以在指标选择上相对容易些。</li>
+<li>当评级指标较多时还可以在保留绝大部分信息的情况下用少数几个综合指标代替原指标进行分析。</li>
+<li>在综合评价函数中，各主成分的权数为其贡献率，它反映了该主成分包含原始数据的信息量占全部信息量的比重，这样确定权数是客观的、合理的，它克服了某些评价方法中认为确定权数的缺陷。</li>
+<li>这种方法的计算比较规范，便于在计算机上实现，还可以利用专门的软件。</li>
+</ol>
+<ul>
+<li><strong>PCA缺点</strong></li>
+</ul>
+<ol>
+<li>在主成分分析中，我们首先应保证所提取的前几个主成分的累计贡献率达到一个较高的水平（即变量降维后的信息量须保持在一个较高水平上），其次对这些被提取的主成分必须都能够给出符合实际背景和意义的解释(否则主成分将空有信息量而无实际含义)。</li>
+<li>主成分的解释其含义一般多少带有点模糊性，不像原始变量的含义那么清楚、确切，这是变量降维过程中不得不付出的代价。因此，提取的主成分个数m通常应明显小于原始变量个数p(除非p本身较小)，否则维数降低的“利”可能抵不过主成分含义不如原始变量清楚的“弊”。</li>
+</ol>
+<ul>
+<li><strong>PCA适用范围</strong></li>
+</ul>
+<ol>
+<li>适用数据:多变量存在一定相关性,只对符合高斯分布的样本点比较有效。</li>
+<li>适用范围:应用于去噪，降维：例如数据表示，模式识别、图像信息压缩、城市道路交通，水质环境评价…..</li>
+</ol>
+<h4 id="（3）PCA计算"><a href="#（3）PCA计算" class="headerlink" title="（3）PCA计算"></a>（3）PCA计算</h4><p>PCA的计算过程涉及到矩阵相关的很多操作，具体计算过程我参考的是<a href="http://www.cnblogs.com/jerrylead/archive/2011/04/18/2020209.html" target="_blank" rel="noopener">JerryLead 博客园</a>,用一个实例详细讲解其具体计算过程，非常清楚，也就是降维的过程以及其数学上的理论基础。其中从n维降到k维的k值确定，则是根据特征向量的值需要占到特征向量值总和的百分比确定的。除了这篇博客以外，还有一篇文章<a href="http://www.sccg.sk/~haladova/principal_components.pdf" target="_blank" rel="noopener">A tutorial on Principal Components Analysis</a>讲解的非常详细。</p>
+<h2 id="2-独立成分分析ICA"><a href="#2-独立成分分析ICA" class="headerlink" title="2.独立成分分析ICA"></a>2.独立成分分析ICA</h2><h4 id="（1）ICA简介"><a href="#（1）ICA简介" class="headerlink" title="（1）ICA简介"></a>（1）ICA简介</h4><ul>
+<li><p><strong>独立成分分析ICA(Independent Component Analysis)</strong>： ICA是一种用来从多变量（多维）统计数据里找到隐含的因素或成分的方法，被认为是主成分分析（Principal Component Analysis, PCA）和因子分析（Factor Analysis）的一种扩展。对于盲源分离问题，ICA是指在只知道混合信号，而不知道源信号、噪声以及混合机制的情况下，分离或近似地分离出源信号的一种分析过程。</p>
+</li>
+<li><p><strong>独立成分分析ICA在维基百科中的解释是</strong>：一种利用统计原理进行计算的方法它是一个线性变换。这个变换把数据或信号分离成统计独立的非高斯的信号源的线性组合。独立成分分析是盲信号分离（Blind source separation）的一种特例。</p>
+</li>
+<li><p><strong>典型实例</strong>:“鸡尾酒会”的问题,假设在party中有n个人，他们可以同时说话，我们也在房间中一些角落里共放置了n个声音接收器（Microphone）用来记录声音。宴会过后，我们从n个麦克风中得到了一组数据{$x^{(i)}(x_1^i,x_2^i,…,x_n^i);i=1,2,…,m$}，i表示采样的时间顺序，也就是说共得到了m组采样，每一组采样都是n维的。我们的目标是单单从这m组采样数据中分辨出每个人说话的信号。</p>
+</li>
+</ul>
+<h4 id="（2）ICA分析"><a href="#（2）ICA分析" class="headerlink" title="（2）ICA分析"></a>（2）ICA分析</h4><ul>
+<li><strong>ICA约束</strong></li>
+</ul>
+<ol>
+<li>独立成分被假定是统计独立的（技术角度上理解：联合概率密度等于各边缘概率密度的乘积）</li>
+<li>独立成分具有非高斯的分布</li>
+<li>假定混合矩阵是方阵（就是独立成分的个数与观测到的混合量个数相同）</li>
+</ol>
+<ul>
+<li><p><strong>ICA优点</strong><br>消除指标的影响和指标选取的工作量</p>
+</li>
+<li><p><strong>ICA缺点</strong><br>独立成分分析并不能完全恢复信号源的具体数值，也不能解出信号源的正负符号、信号的级数或者信号的数值范围。</p>
+</li>
+<li><p><strong>ICA适用范围</strong></p>
+</li>
+</ul>
+<ol>
+<li>适用数据:非高斯分布的样本点</li>
+<li>适用范围：应用于去噪、降维、信号分离：例如码分多址通信、雷达信号分选、心电图（胎儿）、脑电图、图像压缩、图像融合…..</li>
+</ol>
+<h4 id="（3）ICA计算"><a href="#（3）ICA计算" class="headerlink" title="（3）ICA计算"></a>（3）ICA计算</h4><p>ICA的计算过程涉及到许多数学知识，具体计算过程我参考的是<a href="http://www.cnblogs.com/jerrylead/archive/2011/04/19/2021071.html" target="_blank" rel="noopener">JerryLead 博客园</a>,虽然讲解的很详细，以及有些公式还有其具体推到过程，但是对数学要求很高（由于很多数学知识忘了，公式中有些计算不是很理解）。</p>
+<h4 id="（4）PCA和ICA对比"><a href="#（4）PCA和ICA对比" class="headerlink" title="（4）PCA和ICA对比"></a>（4）PCA和ICA对比</h4><ul>
+<li><p>PCA(principal components analysis)就是主成分分析，是数据分析中常用到的一种方法。它是找出数据最主要的方向，并将数据向该方向投影。ICA(Independent components analysis)就是独立成分分析。</p>
+</li>
+<li><p>PCA与ICA的区别主要在于假设条件不同。PCA假设数据是呈高斯或者说指数分布的，而ICA则假设数据是相互独立的。所以在实际处理中，ICA在小样本集时效果较好，而对于大样本集，PCA也能达到很好的效果。因为实际采样中，当采样样本较大时，其一般是呈高斯分布的。<br>PCA的几个主要假设包括：<br>1.处理数据集是线性的，对于非线性问题，有核化PCA可以进行处理，该方法主要是利用非线性权值对线性PCA进行扩展。<br>2.PCA是使用中值和方差来进行概率分布的描述，而这种方法仅适用于样本呈指数分布的情形，所以PCA假设数据时呈高斯分布的。<br>3.PCA隐含着假设：数据具有较高的信噪比，所以具有最大方差的方向被作为主元，而方差最小的方向被作为噪声，这是由低通滤波器的特性决定的。<br>4.主元正交：PCA假设主元之间是正交的，这样假设有利于采用线性代数的方法进行求解。</p>
+</li>
+<li><p>PCA和ICA性能的比较：<br>由于PCA假设的是样本呈高斯分布，所以其在大样本情况下效果较好，而ICA假设样本彼此独立，其效果受样本数量影响不大。<br>对于实验效果，PCA的约束条件是要求各分量不相关，而ICA则是要求严格独立，显然ICA约束比PCA要强很多，所以ICA的特征提取能力比PCA要强很多。</p>
+</li>
+</ul>
+<h2 id="3-Gabor变换"><a href="#3-Gabor变换" class="headerlink" title="3.Gabor变换"></a>3.Gabor变换</h2><h4 id="（1）Gabor变换简介"><a href="#（1）Gabor变换简介" class="headerlink" title="（1）Gabor变换简介"></a>（1）Gabor变换简介</h4><ul>
+<li><p><strong>伽柏（Gabor）变换</strong>：Gabor变换是一种加窗短时傅立叶(Fourier)变换（Window Fourier transform or Short Time Fourier Transform）,Gabor函数可以在频域不同尺度、不同方向上提取相关的特征。Gabor变换是短时Fourier变换中当窗函数取为高斯函数时的一种特殊情况。</p>
+</li>
+<li><p><strong>Gabor变换的基本思想</strong>：把信号划分成许多小的时间间隔，用Fourier变换分析每一个时间间隔，以便确定信号在该时间间隔存在的频率。其处理方法是对f(t)加一个滑动窗，再作Fourier变换。</p>
+</li>
+<li><p><strong>Gabor变换的本质</strong>:实际上还是对二维图像求卷积。因此二维卷积运算的效率就直接决定了Gabor变换的效率。</p>
+</li>
+<li><p><strong>Fourier变换</strong>:是整体上将信号分解为不同的频率分量（任何信号都可分解为复正弦信号之和），对确定性信号及平稳信号使用。其缺点为缺乏时间的局部性信息，并且对时变信号、非平稳信号的分析存在严重不足，(1)无法告知某些频率成分发生在哪些时间内；(2)无法告知某个时刻信号频谱的分布情况。</p>
+</li>
+</ul>
+<ol>
+<li>Fourier变换将时域信号发f(t)转换到频域信号：<br><img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3356269930,1126074676&amp;fm=58" alt=""></li>
+<li>Fourier逆变换将频域信号转换到时域信号：<br><img src="http://images.cnitblog.com/blog/337520/201403/191359041154767.png" alt=""></li>
+</ol>
+<p>其中信号f(t)在任一有限区间满足狄利克雷条件:(1)在一周期内，如果有间断点存在，则间断点的数目应是有限个;(2)在一周期内，极大值和极小值的数目应是有限个;(3)在一周期内，信号是绝对可积的。并且f(t)在$(-\infty,+\infty)$上绝对可即。</p>
+<p>对于Fourier变换网上有很多讲解，如果最开始对Fourier变换没有一点了解，可以看一下这篇<a href="http://blog.jobbole.com/69407/" target="_blank" rel="noopener">博客</a>,让你更清楚的认识Fourier变换。</p>
+<h4 id="（2）Gabor变换分析"><a href="#（2）Gabor变换分析" class="headerlink" title="（2）Gabor变换分析"></a>（2）Gabor变换分析</h4><ul>
+<li><p><strong>Gabor变换优点</strong><br>在提取目标的局部空间和频率域信息方面具有良好的特性。</p>
+</li>
+<li><p><strong>Gabor变换的缺点</strong><br>Gabor变换在一定程度上解决了局部分析的问题，但对于突变信号和非平稳信号仍难以得到满意的结果，即Gabor变换仍存在着较严重的缺陷。</p>
+</li>
+</ul>
+<ol>
+<li>Gabor变换的时频窗口大小、形状不变，只有位置变化，而实际应用中常常希望时频窗口的大小、形状要随频率的变化而变化，因为信号的频率与周期成反比，对高频部分希望能给出相对较窄的时间窗口，以提高分辨率，在低频部分则希望能给出相对较宽的时间窗口，以保证信息的完整性，总之是希望能给出能够调节的时频窗；</li>
+<li>Gabor变换基函数不能成为正交系，因此为了不丢失信息，在信号分析或数值计算时必须采用非正交的冗余基，这就增加了不必要的计算量和存储量。</li>
+</ol>
+<p><strong>无论研究低频成分还是研究高频成分，Gabor变换所采用的时间-频率窗口的宽度和高度都不变，这对研究较高频率或者较低频率都不利。</strong></p>
+<ul>
+<li><strong>Gabor变化适用范围</strong>:非平稳信号。例如可应用于(1)暂态信号检测(2)图象分析与压缩</li>
+</ul>
+<p>很多博客里面都讲解到了<a href="http://blog.csdn.net/augusdi/article/details/11232445" target="_blank" rel="noopener">二维卷积运算</a>和<a href="http://www.cnblogs.com/emouse/p/3611256.html" target="_blank" rel="noopener">Gabor定义</a>,以及<a href="http://blog.sina.com.cn/s/blog_75e063c10101455s.html" target="_blank" rel="noopener">Gabor函数</a>,《非平稳信号特征提取方法及其应用——范虹 著》中的Gabor展开。</p>
+<h2 id="4-匹配追踪"><a href="#4-匹配追踪" class="headerlink" title="4.匹配追踪"></a>4.匹配追踪</h2><h4 id="（1）匹配追踪简介"><a href="#（1）匹配追踪简介" class="headerlink" title="（1）匹配追踪简介"></a>（1）匹配追踪简介</h4><ul>
+<li><p><strong>匹配追踪</strong>:由Mallat等和Qian等基于投影追踪算法提出的逐步递推算法，是一种自适应分解算法。</p>
+</li>
+<li><p><strong>匹配追踪分解信号的关键</strong>:在于找出一系列时频原子，这些时频原子通过逐次分解信号得到。在每一步分解过程中，都寻求与残余信号最为相似的时频原子。</p>
+</li>
+</ul>
+<h4 id="（2）匹配追踪分析"><a href="#（2）匹配追踪分析" class="headerlink" title="（2）匹配追踪分析"></a>（2）匹配追踪分析</h4><ul>
+<li><p><strong>匹配追踪优点</strong><br>匹配追踪算法在思想上摆脱了传统小波分析基于二分频带的约束，是小波框架理论的发展。对于那些单纯使用Fourier基或小波基难以有效表示的高温非平稳信号，应用该算法都可以很好的表示。</p>
+</li>
+<li><p><strong>匹配追踪缺点</strong></p>
+</li>
+</ul>
+<ol>
+<li>算法实现计算量太大。<br>2.不以得到全局最优解</li>
+<li>时频原子的选取与构造比较困难<br>针对这些缺点，人们尝试采用遗传算法实现匹配追踪的分解，以降低匹配追踪算法的计算量。</li>
+</ol>
+<h4 id="（3）信号分析方法"><a href="#（3）信号分析方法" class="headerlink" title="（3）信号分析方法"></a>（3）信号分析方法</h4><ul>
+<li><strong>平稳信号处理方法</strong></li>
+</ul>
+<ol>
+<li>时域分析方法:概率分析法、时域同步平均法、相关分析法，提取信号的幅值、周期、频率、相位以及均值、方差、方根、方根幅值、均方根值、峰值、偏斜度、峭度、波形指标、峰值指标、脉冲指标、裕度指标。</li>
+<li>频域分析方法:频谱分析、倒频谱分析、包络分析。</li>
+</ol>
+<ul>
+<li><strong>非平稳信号时频分析方法</strong><br>Gabor变换，短时Fourier变换、小波分析、双线性时频分析法、自适应信号分解(匹配追踪)、Hilbert-Huang时频分析法</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/21/Twitter数据情感分析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Twitter数据情感分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/10/MySQL数据库操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL数据库操作</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015——2018 dubo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
