@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="dubo blog">
 <meta property="og:description" content="STL是标准模板库，是一些容器的集合。vector是STL中最常见的容器，它是一种顺序容器，支持随机访问。vector是一块连续分配的内存，从数据安排的角度来讲，和数组极其相似，不同的地方就是：数组是静态分配空间，一旦分配了空间的大小，就不可再改变了；而vector是动态分配空间，随着元素的不断插入，它会按照自身的一套机制不断扩充自身的容量。  C++队列queue是一种容器适配器，它给予程序员一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://7xpe3k.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720180329140719.png">
-<meta property="og:updated_time" content="2018-03-29T10:05:01.813Z">
+<meta property="og:image" content="http://flame160.git.io/2015/10/30/STL标准模板库/capacity.png">
+<meta property="og:updated_time" content="2018-12-18T14:04:32.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL标准模板库">
 <meta name="twitter:description" content="STL是标准模板库，是一些容器的集合。vector是STL中最常见的容器，它是一种顺序容器，支持随机访问。vector是一块连续分配的内存，从数据安排的角度来讲，和数组极其相似，不同的地方就是：数组是静态分配空间，一旦分配了空间的大小，就不可再改变了；而vector是动态分配空间，随着元素的不断插入，它会按照自身的一套机制不断扩充自身的容量。  C++队列queue是一种容器适配器，它给予程序员一">
-<meta name="twitter:image" content="http://7xpe3k.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720180329140719.png">
+<meta name="twitter:image" content="http://flame160.git.io/2015/10/30/STL标准模板库/capacity.png">
   
     <link rel="alternative" href="/atom.xml" title="dubo blog" type="application/atom+xml">
   
@@ -273,7 +273,8 @@ var _hmt = _hmt || [];
       
         <p>STL是标准模板库，是一些容器的集合。vector是STL中最常见的容器，它是一种顺序容器，支持随机访问。vector是一块连续分配的内存，从数据安排的角度来讲，和数组极其相似，不同的地方就是：数组是静态分配空间，一旦分配了空间的大小，就不可再改变了；而vector是动态分配空间，随着元素的不断插入，它会按照自身的一套机制不断扩充自身的容量。</p>
 <p> C++队列queue是一种容器适配器，它给予程序员一种先进先出(FIFO)的数据结构。<br> C++ STL中标准关联容器set, multiset, map, multimap内部采用的是一种非常高效的平衡检索二叉树：红黑树。<br><a id="more"></a></p>
-<h2 id="1-vector基本用法"><a href="#1-vector基本用法" class="headerlink" title="1.vector基本用法"></a>1.vector基本用法</h2><p><strong>vector: 内部实现是数组，一段连续的内存。</strong>vector是C++标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说，vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。<br><img src="http://7xpe3k.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720180329140719.png" align="center/"><br><strong>vector的大小：size，vector的容量：capacity。</strong>size表示vector中已有元素的个数，capacity表示vector最多可存储的元素的个数。为了降低二次分配时的成本，vector实际配置的大小可能比客户需求的更大一些，以备将来扩充，即capacity&gt;=size。当等于时，容器此时已满，若再要加入新的元素时，就要重新进行内存分配，整个vector的数据都要移动到新内存。二次分配成本较高，在实际操作时，应尽量预留一定空间，避免二次分配。当vector的容量不足以插入count个元素，即capacity &lt;size + count需要进行二次分配，扩大vector的容量。在VS下，vector容量会扩大50%，即 capacity = capacity+ capacity / 2; 若仍不足，则 capacity = size + count。</p>
+<h2 id="1-vector基本用法"><a href="#1-vector基本用法" class="headerlink" title="1.vector基本用法"></a>1.vector基本用法</h2><p><strong>vector: 内部实现是数组，一段连续的内存。</strong>vector是C++标准模板库中的部分内容，它是一个多功能的，能够操作多种数据结构和算法的模板类和函数库。vector之所以被认为是一个容器，是因为它能够像容器一样存放各种类型的对象，简单地说，vector是一个能够存放任意类型的动态数组，能够增加和压缩数据。</p>
+<p><div align="center"><img src="/2015/10/30/STL标准模板库/capacity.png" alt="图片"><br><strong>vector的大小：size，vector的容量：capacity。</strong>size表示vector中已有元素的个数，capacity表示vector最多可存储的元素的个数。为了降低二次分配时的成本，vector实际配置的大小可能比客户需求的更大一些，以备将来扩充，即capacity&gt;=size。当等于时，容器此时已满，若再要加入新的元素时，就要重新进行内存分配，整个vector的数据都要移动到新内存。二次分配成本较高，在实际操作时，应尽量预留一定空间，避免二次分配。当vector的容量不足以插入count个元素，即capacity &lt;size + count需要进行二次分配，扩大vector的容量。在VS下，vector容量会扩大50%，即 capacity = capacity+ capacity / 2; 若仍不足，则 capacity = size + count。</div></p>
 <ul>
 <li><strong>头文件</strong> #include &lt;vector &gt;, 命名域std(using std:vector), 建议使用全局的命名域(using namespace std);</li>
 <li><strong>创建vector对象</strong>, vector &lt;int &gt; vec;</li>
