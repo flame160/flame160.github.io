@@ -5,18 +5,18 @@
   
   <title>MySQL数据库操作 | dubo blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中，遇到很多对数据库的相关操作，经过学习之后，在这里进行整理，列出对数据库的基本操作，本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
+  <meta name="description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中,遇到很多对数据库的相关操作,经过学习之后,在这里进行整理,列出对数据库的基本操作,本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS）,MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL数据库操作">
 <meta property="og:url" content="http://flame160.git.io/2015/11/10/MySQL数据库操作/index.html">
 <meta property="og:site_name" content="dubo blog">
-<meta property="og:description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中，遇到很多对数据库的相关操作，经过学习之后，在这里进行整理，列出对数据库的基本操作，本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
+<meta property="og:description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中,遇到很多对数据库的相关操作,经过学习之后,在这里进行整理,列出对数据库的基本操作,本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS）,MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-29T10:29:20.929Z">
+<meta property="og:updated_time" content="2018-12-18T14:55:12.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库操作">
-<meta name="twitter:description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中，遇到很多对数据库的相关操作，经过学习之后，在这里进行整理，列出对数据库的基本操作，本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
+<meta name="twitter:description" content="数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中,遇到很多对数据库的相关操作,经过学习之后,在这里进行整理,列出对数据库的基本操作,本博客只是对应用较为常见的操作进行整理。MySQL是一种开放源代码的关系型数据库管理系统（RDBMS）,MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。">
   
     <link rel="alternative" href="/atom.xml" title="dubo blog" type="application/atom+xml">
   
@@ -269,7 +269,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中，遇到很多对数据库的相关操作，经过学习之后，在这里进行整理，列出对数据库的基本操作，本博客只是对应用较为常见的操作进行整理。<br>MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。<br><a id="more"></a></p>
+        <p>数据库(Database)是按照数据结构来组织、存储和管理数据的仓库。在学习网站的过程中,遇到很多对数据库的相关操作,经过学习之后,在这里进行整理,列出对数据库的基本操作,本博客只是对应用较为常见的操作进行整理。<br>MySQL是一种开放源代码的关系型数据库管理系统（RDBMS）,MySQL数据库系统使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。<br><a id="more"></a></p>
 <h2 id="mysql服务操作"><a href="#mysql服务操作" class="headerlink" title="mysql服务操作"></a>mysql服务操作</h2><ul>
 <li><strong>启动或关闭mysql服务</strong></li>
 </ul>
@@ -277,7 +277,7 @@ var _hmt = _hmt || [];
 <ul>
 <li><strong>增加新用户</strong></li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant 权限 on 数据库.* to 用户名@登陆主机 identified by <span class="string">"密码"</span><span class="comment">//基本格式</span></span><br><span class="line">grant select,insert,update,<span class="keyword">delete</span> on *.* to user1@localhost identified by <span class="string">"password1"</span>;<span class="comment">//具体例子</span></span><br><span class="line"><span class="comment">//用户名为user1，密码为password1，让其在本机上登陆，并对所有的数据库有查询、插入、修改、删除的权限。</span></span><br><span class="line"><span class="comment">//首先以root用户连接mysql，然后键入该命令</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant 权限 on 数据库.* to 用户名@登陆主机 identified by <span class="string">"密码"</span><span class="comment">//基本格式</span></span><br><span class="line">grant select,insert,update,<span class="keyword">delete</span> on *.* to user1@localhost identified by <span class="string">"password1"</span>;<span class="comment">//具体例子</span></span><br><span class="line"><span class="comment">//用户名为user1,密码为password1,让其在本机上登陆,并对所有的数据库有查询、插入、修改、删除的权限。</span></span><br><span class="line"><span class="comment">//首先以root用户连接mysql,然后键入该命令</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>进入数据库</strong></li>
 </ul>
@@ -326,7 +326,7 @@ var _hmt = _hmt || [];
 </tr>
 <tr>
 <td style="text-align:left">create database think character set utf8 ;</td>
-<td style="text-align:left">创建数据库think(数据库名)，设置编码为utf8</td>
+<td style="text-align:left">创建数据库think(数据库名),设置编码为utf8</td>
 </tr>
 <tr>
 <td style="text-align:left">drop database think;</td>
@@ -334,7 +334,7 @@ var _hmt = _hmt || [];
 </tr>
 <tr>
 <td style="text-align:left">grant all on wish.* to “hdw” @”localhost” identified by “hdw”;</td>
-<td style="text-align:left">只允许hdw用户操作数据库wish，密码是hdw</td>
+<td style="text-align:left">只允许hdw用户操作数据库wish,密码是hdw</td>
 </tr>
 <tr>
 <td style="text-align:left">C://mysqldump -uroot -p houdunwang &gt; d:/houdunwang.sql</td>
@@ -357,7 +357,7 @@ var _hmt = _hmt || [];
 <ul>
 <li><strong>创建表</strong></li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table hd_wish(id int unsigned not null primary key auto_increment, username varchar(20) not null default '',content</span><br><span class="line">varchar(255) not null default '',time int(10) not null default 0) engine myisam charset utf8;</span><br><span class="line"><span class="comment">//创建表hd_wish（primary key 定义这个字段为主键，auto_increment 定义这个字段为自动增长，引擎为myisam，字符集为utf8）</span></span><br><span class="line">create table new_tab_name like old_tab_name; <span class="comment">//用一个已存在的表来建新表，但不包含旧表的数据</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table hd_wish(id int unsigned not null primary key auto_increment, username varchar(20) not null default '',content</span><br><span class="line">varchar(255) not null default '',time int(10) not null default 0) engine myisam charset utf8;</span><br><span class="line"><span class="comment">//创建表hd_wish（primary key 定义这个字段为主键,auto_increment 定义这个字段为自动增长,引擎为myisam,字符集为utf8）</span></span><br><span class="line">create table new_tab_name like old_tab_name; <span class="comment">//用一个已存在的表来建新表,但不包含旧表的数据</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>查看表中的数据</strong></li>
 </ul>
@@ -373,7 +373,7 @@ var _hmt = _hmt || [];
 <ul>
 <li><strong>修改</strong></li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">alter table tab_name add PRIMARY <span class="title">KEY</span> <span class="params">(col_name)</span></span>;  <span class="comment">//更改表得的定义把col_num设为主键</span></span><br><span class="line"><span class="function">alter table tab_name drop PRIMARY <span class="title">KEY</span> <span class="params">(col_name)</span></span>;  <span class="comment">//把主键的定义删除</span></span><br><span class="line">update stu <span class="built_in">set</span> birday=<span class="string">"1990/2/23"</span> where id=<span class="number">1</span>;   <span class="comment">//修改表stu中id=1的数据(将birday修改为"1990/2/23")</span></span><br><span class="line">alter table tab_name rename to new_tab_name;   <span class="comment">//修改表名</span></span><br><span class="line"><span class="function">alter table tab_name change old_col new_col <span class="title">varchar</span><span class="params">(<span class="number">20</span>)</span></span>; <span class="comment">//修改字段名--必须为当前字段指定数据类型等属性，否则不能修改</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">alter table tab_name add PRIMARY <span class="title">KEY</span> <span class="params">(col_name)</span></span>;  <span class="comment">//更改表得的定义把col_num设为主键</span></span><br><span class="line"><span class="function">alter table tab_name drop PRIMARY <span class="title">KEY</span> <span class="params">(col_name)</span></span>;  <span class="comment">//把主键的定义删除</span></span><br><span class="line">update stu <span class="built_in">set</span> birday=<span class="string">"1990/2/23"</span> where id=<span class="number">1</span>;   <span class="comment">//修改表stu中id=1的数据(将birday修改为"1990/2/23")</span></span><br><span class="line">alter table tab_name rename to new_tab_name;   <span class="comment">//修改表名</span></span><br><span class="line"><span class="function">alter table tab_name change old_col new_col <span class="title">varchar</span><span class="params">(<span class="number">20</span>)</span></span>; <span class="comment">//修改字段名--必须为当前字段指定数据类型等属性,否则不能修改</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>增加</strong></li>
 </ul>
